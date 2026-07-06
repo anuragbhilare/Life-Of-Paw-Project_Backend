@@ -101,6 +101,7 @@ public class AnimalService {
 		existingAnimal.setGender(updatedDetails.getGender());
 		existingAnimal.setAgeCategory(updatedDetails.getAgeCategory());
 		existingAnimal.setDescription(updatedDetails.getDescription());
+		existingAnimal.setMedicalHistory(updatedDetails.getMedicalHistory());
 		
 		return animalRepository.save(existingAnimal);
 	}

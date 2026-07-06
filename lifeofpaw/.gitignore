@@ -32,3 +32,17 @@ build/
 ### VS Code ###
 .vscode/
 /.apt_generated_tests/
+
+# Uploaded files
+uploads/
+
+# Logs
+*.log
+
+# Environment variables
+.env
+.env.*
+
+# OS files
+.DS_Store
+Thumbs.db

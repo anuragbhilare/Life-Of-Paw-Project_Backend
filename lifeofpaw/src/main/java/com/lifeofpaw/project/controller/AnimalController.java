@@ -158,6 +158,35 @@ public class AnimalController {
 				.orElseThrow(() -> new RuntimeException("ERROR: Animal profile with ID " + animalId + " does not exist in our registry."));
 	}
 	
+	@DeleteMapping("/{animalId}/remove-image")
+	public org.springframework.http.ResponseEntity<?> removeAnimalImage(@PathVariable Long animalId, Principal principal) {
+	    
+	    Animal animal = animalRepository.findById(animalId)
+	            .orElseThrow(() -> new RuntimeException("Animal profile not found"));
+	    
+	    User user = userRepository.findByEmail(principal.getName()).get();
+	    
+	    if (!user.getRole().equalsIgnoreCase("admin")) {
+	        Organizations userOrg = organizationRepository.findAll().stream()
+	            .filter(o -> o.getContactPerson() != null && o.getContactPerson().getUserId() == user.getUserId())
+	            .findFirst()        
+	            .orElseThrow(() -> new RuntimeException("Security Error: Linked NGO profile not found."));
+
+	        if (!animal.getOrganization().getOrgId().equals(userOrg.getOrgId())) {
+	            throw new RuntimeException("SECURITY VIOLATION: You can only remove images for your own animals!");
+	        }
+	    }
+	    
+	    if (animal.getImages() != null && !animal.getImages().isEmpty()) {
+	        animalImageRepository.deleteAll(animal.getImages());
+	        
+	        animal.getImages().clear();
+	        
+	        animalRepository.save(animal);
+	    }
+	    
+	    return org.springframework.http.ResponseEntity.ok().body("Image cleared successfully from database registry.");
+	}
 	
 	
 }

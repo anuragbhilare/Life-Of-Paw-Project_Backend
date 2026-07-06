@@ -48,6 +48,7 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.DELETE, "/api/animals/**").hasAnyAuthority("ROLE_org", "ROLE_admin")
                 .requestMatchers("/api/adoptions/update-status").hasAnyAuthority("ROLE_org", "ROLE_admin")
                 .requestMatchers("/api/animals/{animalId}/add-image").hasAnyAuthority("ROLE_org", "ROLE_admin")
+                .requestMatchers(HttpMethod.DELETE, "/api/animals/{animalId}/remove-image").hasAnyAuthority("ROLE_org", "ROLE_admin")
                 
                 // 4. USER ACTIONS (Keeping your working rules)
                 .requestMatchers("/api/adoptions/apply").authenticated()
