@@ -30,7 +30,7 @@ public class WebConfig implements WebMvcConfigurer{
 	public void addCorsMappings(CorsRegistry registry) {
 		registry.addMapping("/**")
 		
-		.allowedOrigins("http://localhost:5173") 
+		.allowedOrigins("https://life-of-paw-project-frontend.onrender.com")
         // Allows all common HTTP methods
         .allowedMethods("GET", "POST", "PUT","PATCH", "DELETE", "OPTIONS")
         // Allows all headers (like Authorization headers carrying your JWT tokens)
