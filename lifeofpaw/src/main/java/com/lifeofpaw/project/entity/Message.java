@@ -1,6 +1,9 @@
 package com.lifeofpaw.project.entity;
 
+import java.sql.Types;
 import java.time.LocalDateTime;
+
+import org.hibernate.annotations.JdbcTypeCode;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,7 +34,8 @@ public class Message {
 	@JoinColumn(name = "receiver_id")
 	private User receiver;
 	
-	@Lob
+	
+	@JdbcTypeCode(Types.LONGVARCHAR)
 	private String content;
 
 	private String imageUrl;
