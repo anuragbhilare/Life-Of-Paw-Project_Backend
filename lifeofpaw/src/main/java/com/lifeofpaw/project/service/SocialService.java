@@ -133,7 +133,13 @@ public class SocialService {
 		
 		Message m = new Message();
 		m.setSender(sender);
-		m.setReceiver(null); 
+		
+		User adminUser = userRepository.findAll().stream()
+				.filter(u -> "admin".equalsIgnoreCase(u.getRole()))
+				.findFirst()
+				.orElse(null);
+				
+		m.setReceiver(adminUser); 
 		m.setContent(content);
 		m.setMsgType("PRIVATE");
 		m.setImageUrl(null);

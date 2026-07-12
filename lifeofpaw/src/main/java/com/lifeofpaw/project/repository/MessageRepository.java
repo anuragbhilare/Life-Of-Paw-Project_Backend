@@ -20,6 +20,6 @@ public interface MessageRepository extends JpaRepository<Message, Long>{
 	
 	List<Message> findBySender_UserIdOrReceiver_UserIdAndMsgTypeOrderByCreatedAtDesc(Long senderId, Long receiverId, String msgType);
 	
-	@Query("SELECT m FROM Message m WHERE m.msgType = :msgType AND m.receiver IS NULL ORDER BY m.createdAt DESC")
+	@Query("SELECT m FROM Message m WHERE m.msgType = :msgType AND (m.receiver IS NULL OR m.receiver.role = 'admin') ORDER BY m.createdAt DESC")
 	List<Message> findSupportMessages(@Param("msgType") String msgType);
 }
