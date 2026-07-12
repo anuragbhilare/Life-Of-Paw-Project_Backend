@@ -26,7 +26,12 @@ public interface AdoptionRepository extends JpaRepository<AdoptionRequest, Long>
 
 	Long countByStatus(String status);
 	
-	@Query(value = "SELECT * FROM (SELECT * FROM ADOPTION_REQUESTS ORDER BY REQUEST_DATE DESC) WHERE ROWNUM <= 5", nativeQuery = true)
+	@Query(value = """
+		    SELECT *
+		    FROM ADOPTION_REQUESTS
+		    ORDER BY REQUEST_DATE DESC
+		    LIMIT 5
+		    """, nativeQuery = true)
 	List<AdoptionRequest> findLatestRequests();
 
 	@Query("SELECT COUNT(a) > 0 FROM AdoptionRequest a " +

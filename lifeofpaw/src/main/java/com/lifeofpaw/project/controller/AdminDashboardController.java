@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,6 +34,7 @@ public class AdminDashboardController {
 	private AdoptionRepository adoptionRepo;
 	
 	@GetMapping("/master-view")
+	@Transactional(readOnly = true)
 	public Map<String, Object> getMasterDashboard(){
 		
 		Map<String, Object> response=new HashMap<>();

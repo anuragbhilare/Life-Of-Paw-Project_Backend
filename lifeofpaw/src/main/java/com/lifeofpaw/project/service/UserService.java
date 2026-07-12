@@ -30,6 +30,8 @@ public class UserService {
 	
 	public User registerUser(User user) {
 		
+		user.setEmail(user.getEmail().trim().toLowerCase());
+		
 		if(userRepository.findByEmail(user.getEmail()).isPresent()) {
 			throw new IllegalArgumentException("An account with this email address already exists.");
 		}

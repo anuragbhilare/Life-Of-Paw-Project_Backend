@@ -16,7 +16,12 @@ public interface OrganizationRepository extends JpaRepository<Organizations, Lon
 	List<Organizations> findByContactPerson_UserId(Long userId);
 
 	
-	@Query(value = "Select * from (select * from organizations order by org_id desc) where rownum<=3",nativeQuery = true)
+	@Query(value = """
+		    SELECT *
+		    FROM organizations
+		    ORDER BY org_id DESC
+		    LIMIT 3
+		    """, nativeQuery = true)
 	List<Organizations> findLatestOrganization();
 	
 	
