@@ -67,7 +67,7 @@ public class OrganizationService {
 		Organizations org=organizationRepository.findById(orgId)
 				.orElseThrow(()->new jakarta.persistence.EntityNotFoundException("Cannot delete. Organization ID " + orgId + " does not exist."));
 		
-		List<Animal> animals=animalRepository.findByOrganization_orgId(orgId);
+		List<Animal> animals=animalRepository.findByOrganization_OrgId(orgId);
 		for(Animal animal : animals) {
 			adoptionRepository.deleteByAnimal_AnimalId(animal.getAnimalId());
 		}
