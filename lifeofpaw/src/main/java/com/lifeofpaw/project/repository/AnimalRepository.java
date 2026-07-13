@@ -28,11 +28,11 @@ public interface AnimalRepository extends JpaRepository<Animal, Long>{
 	
 	
 	@Query("SELECT COUNT(a) > 0 FROM Animal a WHERE " +
-           "UPPER(a.name) = UPPER(:name) AND " +
-           "UPPER(a.species) = UPPER(:species) AND " +
-           "UPPER(a.gender) = UPPER(:gender) AND " +
-           "a.status = :status AND " +
-           "a.organization.orgId = :orgId")
+       "UPPER(a.name) = UPPER(:name) AND " +
+       "UPPER(a.species) = UPPER(:species) AND " +
+       "UPPER(a.gender) = UPPER(:gender) AND " +
+       "a.status = :status AND " +
+       "a.organization.orgId = :orgId")
 	 boolean checkDuplicateAnimal(
 		        @Param("name") String name, 
 		        @Param("species") String species, 
