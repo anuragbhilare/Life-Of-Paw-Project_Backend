@@ -43,7 +43,7 @@ public class Animal {
 	private String ageCategory;
 	
 	@Lob
-	private String Description;
+	private String description;
 	
 	@Lob
 	private String medicalHistory;

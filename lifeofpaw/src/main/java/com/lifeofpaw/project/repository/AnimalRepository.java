@@ -23,7 +23,7 @@ public interface AnimalRepository extends JpaRepository<Animal, Long>{
 			String species,String gender,String status
 			);
 	
-	List<Animal> findByOrganization_orgId(Long orgId);
+	List<Animal> findByOrganization_OrgId(Long orgId);
 
 	
 	

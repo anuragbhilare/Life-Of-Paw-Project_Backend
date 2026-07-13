@@ -91,20 +91,20 @@ public class AnimalService {
 	}
 	
 	@Transactional
-	public Animal updateAnimal(Long id,Animal updatedDetails) {
-		Animal existingAnimal=animalRepository.findById(id)
-				.orElseThrow(()->new RuntimeException("Animal not found with id: " + id));
-		
-		existingAnimal.setName(updatedDetails.getName());
-		existingAnimal.setSpecies(updatedDetails.getSpecies());
-		existingAnimal.setBreed(updatedDetails.getBreed());
-		existingAnimal.setGender(updatedDetails.getGender());
-		existingAnimal.setAgeCategory(updatedDetails.getAgeCategory());
-		existingAnimal.setDescription(updatedDetails.getDescription());
-		existingAnimal.setMedicalHistory(updatedDetails.getMedicalHistory());
-		
-		return animalRepository.save(existingAnimal);
-	}
+	public Animal updateAnimal(Long id, Animal updatedDetails) {
+	    Animal existingAnimal = animalRepository.findById(id)
+	            .orElseThrow(() -> new RuntimeException("Animal not found with id: " + id));
+	    
+	    existingAnimal.setName(updatedDetails.getName());
+	    existingAnimal.setSpecies(updatedDetails.getSpecies());
+	    existingAnimal.setBreed(updatedDetails.getBreed());
+	    existingAnimal.setGender(updatedDetails.getGender());
+	    existingAnimal.setAgeCategory(updatedDetails.getAgeCategory());	    
+	    existingAnimal.setDescription(updatedDetails.getDescription());	    
+	    existingAnimal.setMedicalHistory(updatedDetails.getMedicalHistory());
+	    
+	    return animalRepository.save(existingAnimal);
+	}	
 	
 	@Transactional
 	public void deleteAnimal(Long id) {
@@ -121,11 +121,11 @@ public class AnimalService {
 
 		return animalRepository.findAll();
 
-		}
+		}		
 	
 	public List<Animal> getAnimalsByOrg(Long orgId, String currentUserEmail){
 		validateOrgOwnership(orgId, currentUserEmail);
-		return animalRepository.findByOrganization_orgId(orgId);
+		return animalRepository.findByOrganization_OrgId(orgId);
 	}
 	
 	
