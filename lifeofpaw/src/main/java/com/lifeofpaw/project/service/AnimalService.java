@@ -81,10 +81,12 @@ public class AnimalService {
 	}
 	
 	
+	@Transactional(readOnly = true)
 	public List<Animal> getAllAvailableAnimals(){
 		return animalRepository.findByStatus("AVAILABLE");
 	}
 	
+	@Transactional(readOnly = true)
 	public List<Animal> searchAnimal(String species,String gender, String status){
 		String searchStatus=(status==null)? "AVAILABLE" : status;
 		return animalRepository.findBySpeciesIgnoreCaseAndGenderIgnoreCaseAndStatusIgnoreCase(species, gender, searchStatus);
@@ -117,12 +119,14 @@ public class AnimalService {
 		animalRepository.deleteById(id);
 	}
 	
+	@Transactional(readOnly = true)
 	public List<Animal> getAllAnimals() {
 
 		return animalRepository.findAll();
 
 		}		
 	
+	@Transactional(readOnly = true)
 	public List<Animal> getAnimalsByOrg(Long orgId, String currentUserEmail){
 		validateOrgOwnership(orgId, currentUserEmail);
 		return animalRepository.findByOrganization_OrgId(orgId);

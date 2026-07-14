@@ -42,12 +42,10 @@ public class Animal {
 	@Column(name = "age_category",length = 20)
 	private String ageCategory;
 	
-	@Lob
-	@Column(name = "description")
+	@Column(name = "description", columnDefinition = "TEXT")
 	private String description;
 
-	@Lob
-	@Column(name = "medical_history")
+	@Column(name = "medical_history", columnDefinition = "TEXT")
 	private String medicalHistory;
 	
 	@Column(length = 30)

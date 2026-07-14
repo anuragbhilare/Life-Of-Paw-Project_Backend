@@ -75,6 +75,7 @@ public class OrganizationService {
 		organizationRepository.delete(org);
 	}
 	
+	@Transactional(readOnly = true)
 	public List<Organizations> getAllOrganizations() {
 		List<Organizations> orgs = organizationRepository.findAllWithImages();
 		
@@ -87,6 +88,7 @@ public class OrganizationService {
 		return orgs;
 	}
 	
+	@Transactional(readOnly = true)
 	public List<Organizations> getPendingOrganizations() {
 		return organizationRepository.findByIsVerifiedWithImages("N");
 	}
