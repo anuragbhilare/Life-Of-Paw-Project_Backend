@@ -30,4 +30,7 @@ public interface OrganizationRepository extends JpaRepository<Organizations, Lon
 	
 	@Query("SELECT DISTINCT o FROM Organizations o LEFT JOIN FETCH o.galleryImages WHERE o.isVerified = :status ORDER BY o.orgId DESC")
 	List<Organizations> findByIsVerifiedWithImages(@Param("status") String status);
+
+	@Query("SELECT o FROM Organizations o LEFT JOIN o.animals a WHERE o.isVerified = 'Y' GROUP BY o.orgId ORDER BY COUNT(a) DESC LIMIT 4")
+	List<Organizations> findTopOrganizationsByAnimalCount();
 }

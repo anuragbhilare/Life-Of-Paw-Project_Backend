@@ -19,6 +19,7 @@ import com.lifeofpaw.project.entity.Organizations;
 import com.lifeofpaw.project.entity.OrganizationImage;
 import com.lifeofpaw.project.entity.User;
 import com.lifeofpaw.project.repository.UserRepository;
+import com.lifeofpaw.project.repository.OrganizationRepository;
 import com.lifeofpaw.project.service.OrganizationService;
 import com.lifeofpaw.project.service.FileStorageService;
 
@@ -28,6 +29,9 @@ public class OrganizationController {
 
 	@Autowired
 	private OrganizationService organizationService;
+	
+	@Autowired
+	private OrganizationRepository organizationRepository;
 	
 	@Autowired
 	private UserRepository userRepository;
@@ -96,5 +100,10 @@ public class OrganizationController {
 	@GetMapping("/pending")
 	public List<Organizations> getPendingOrgs() {
 		return organizationService.getPendingOrganizations();
+	}
+
+	@GetMapping("/public/top")
+	public List<Organizations> getTopOrganizations() {
+		return organizationRepository.findTopOrganizationsByAnimalCount();
 	}
 }

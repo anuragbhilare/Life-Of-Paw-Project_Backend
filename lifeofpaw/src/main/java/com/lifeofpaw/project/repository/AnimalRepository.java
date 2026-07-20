@@ -43,4 +43,6 @@ public interface AnimalRepository extends JpaRepository<Animal, Long>{
 
 	List<Animal> findAllByOrganization_OrgId(Long orgId);
 	
+	@Query(value = "SELECT * FROM animals WHERE status = 'AVAILABLE' ORDER BY RANDOM() LIMIT 3", nativeQuery = true)
+	List<Animal> findRandomFeaturedAnimals();
 }

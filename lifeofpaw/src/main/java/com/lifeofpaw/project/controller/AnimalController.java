@@ -187,6 +187,9 @@ public class AnimalController {
 	    
 	    return org.springframework.http.ResponseEntity.ok().body("Image cleared successfully from database registry.");
 	}
-	
-	
+
+	@GetMapping("/public/featured")
+	public List<Animal> getFeaturedAnimals() {
+		return animalRepository.findRandomFeaturedAnimals();
+	}
 }
