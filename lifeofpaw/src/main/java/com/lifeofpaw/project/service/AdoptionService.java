@@ -111,6 +111,7 @@ public class AdoptionService {
 		
 	}
 	
+	@Transactional(readOnly = true)
 	public List<AdoptionRequest> getUserAdoptionHistory(Long userId) {
 		if(!userRepository.existsById(userId)) {
 			throw new RuntimeException("User with ID " + userId + " not found.");
@@ -120,11 +121,13 @@ public class AdoptionService {
 		return adoptionRepository.findByUser_UserId(userId);
 	}
 	
+	@Transactional(readOnly = true)
 	public List<AdoptionRequest> getRequestForOrg(Long orgId, String currentUserEmail){
 		validateOrgOwnership(orgId, currentUserEmail);
 		return adoptionRepository.findByAnimal_Organization_OrgId(orgId);
 	}
 	
+	@Transactional(readOnly = true)
 	public List<AdoptionRequest> getPendingRequestForOrg(Long orgId, String currentUserEmail) {
 		validateOrgOwnership(orgId, currentUserEmail);
 		return adoptionRepository.findByStatusAndAnimal_Organization_OrgId("PENDING", orgId);

@@ -36,7 +36,7 @@ public class AdoptionRequest {
 	@Column(length = 20)
 	private String status="PENDING";
 	
-	@Lob
+	@Column(columnDefinition = "TEXT")
 	private String reason;
 	
 	@Column(name = "delivery_location",length = 500)
