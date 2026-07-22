@@ -172,4 +172,10 @@ public class SocialController {
 		return socialService.adminReplyToUser(adminUser.getUserId(), userId, content);
 	}
 	
+	@org.springframework.web.bind.annotation.PutMapping("/messages/read/{otherUserId}")
+	public String markAsRead(Principal principal, @org.springframework.web.bind.annotation.PathVariable Long otherUserId) {
+		User user = userRepository.findByEmail(principal.getName()).get();
+		socialService.markMessagesAsRead(otherUserId, user.getUserId());
+		return "Messages marked as read";
+	}
 }

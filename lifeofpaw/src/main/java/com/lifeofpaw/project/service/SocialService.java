@@ -171,6 +171,15 @@ public class SocialService {
 		return messageRepository.save(m);
 	}
 	
-
-
+	@Transactional
+	public void markMessagesAsRead(Long senderId, Long receiverId) {
+		List<Message> messages = messageRepository.findDirectMessages(senderId, receiverId);
+		for (Message m : messages) {
+			if (m.getReceiver() != null && m.getReceiver().getUserId() == receiverId &&
+			    m.getSender() != null && m.getSender().getUserId() == senderId && !m.isRead()) {
+				m.setRead(true);
+				messageRepository.save(m);
+			}
+		}
+	}
 }

@@ -44,6 +44,9 @@ public class Message {
 	
 	private LocalDateTime createdAt=LocalDateTime.now();
 
+	@com.fasterxml.jackson.annotation.JsonProperty("isRead")
+	private boolean isRead = false;
+
 
 
 }
