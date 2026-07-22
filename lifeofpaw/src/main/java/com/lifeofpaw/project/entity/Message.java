@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 
 import org.hibernate.annotations.JdbcTypeCode;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -44,7 +45,7 @@ public class Message {
 	
 	private LocalDateTime createdAt=LocalDateTime.now();
 
-	@com.fasterxml.jackson.annotation.JsonProperty("isRead")
+	@Column(name = "is_read", nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
 	private boolean isRead = false;
 
 
