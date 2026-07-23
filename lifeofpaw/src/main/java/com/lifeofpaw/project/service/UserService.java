@@ -74,12 +74,13 @@ public class UserService {
 		User user=userRepository.findById(id)
 				.orElseThrow(()->new RuntimeException("User not found with ID: " + id));
 		
-		if(details.getEmail()!=null && !details.getEmail().equalsIgnoreCase(user.getEmail())) {
-			boolean emailExists = userRepository.findByEmail(details.getEmail()).isPresent();
+		if(details.getEmail()!=null && !details.getEmail().trim().toLowerCase().equalsIgnoreCase(user.getEmail())) {
+			String normalizedEmail = details.getEmail().trim().toLowerCase();
+			boolean emailExists = userRepository.findByEmail(normalizedEmail).isPresent();
 			if(emailExists) {
 				throw new RuntimeException("Update Failed: This email address is already registered to another account!");
 			}
-			user.setEmail(details.getEmail());
+			user.setEmail(normalizedEmail);
 		}
 		
 

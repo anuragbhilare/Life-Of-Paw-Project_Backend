@@ -58,4 +58,11 @@ public class User {
 	@JsonIgnore
 	private List<Organizations> organizations;
 	
+	@PrePersist
+	@PreUpdate
+	public void normalizeEmail() {
+		if (this.email != null) {
+			this.email = this.email.trim().toLowerCase();
+		}
+	}
 }
