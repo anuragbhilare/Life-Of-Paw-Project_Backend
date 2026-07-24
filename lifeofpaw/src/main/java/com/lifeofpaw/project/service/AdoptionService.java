@@ -56,6 +56,13 @@ public class AdoptionService {
 		
 		Animal animal=animalRepository.findById(animalId)
 				.orElseThrow(()->new RuntimeException("Animal not found"));
+
+		if (animal.getOrganization() != null && animal.getOrganization().getContactPerson() != null) {
+			if (animal.getOrganization().getContactPerson().getEmail().equalsIgnoreCase(user.getEmail()) ||
+			    animal.getOrganization().getContactPerson().getUserId() == user.getUserId()) {
+				throw new IllegalArgumentException("You cannot submit an adoption request for an animal listed by your own organization.");
+			}
+		}
 	
 		if("ADOPTED".equalsIgnoreCase(animal.getStatus())) {
 			throw new RuntimeException("Adoption Failed: This beautiful pet has already been adopted by someone else!");
